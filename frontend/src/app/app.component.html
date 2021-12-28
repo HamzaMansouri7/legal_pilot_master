@@ -1,0 +1,162 @@
+<div class="login-container" *ngIf="!currentUser">
+    <div class="container">
+        <div class="d-flex justify-content-center h-100">
+            <div class="login-card">
+                <div class="card-header d-flex">
+                    <h3 class="text-white">Sign In</h3>
+                </div>
+                <div class="card-body">
+                    <form class="mt-2">
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">      
+                                <img src='../assets/search.svg' />
+                                </span>
+                            </div>
+                            <input type="email" class="form-control" type="email" name="email" [(ngModel)]="user.email"
+                                placeholder="Enter your e-mail">
+                        </div>
+                        <button
+                            class="btn border border-white float-right login_btn text-white login-container border-2 mt-1 mb-2 text-small"
+                            (click)="login()">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row p-5 h-100 d-flex align-items-center justify-content-center" *ngIf="currentUser">
+    <div class="col-md-4 col-xl-3 chat ">
+        <div class="card mb-sm-3 mb-md-0 contacts_card background">
+            <div class="card-header">
+                <div class="input-group">
+                    <input type="text" placeholder="Search..." name="" class="form-control search">
+                </div>
+            </div>
+            <div class="card-body contacts_body">
+                <ul class="contacts">
+                    <li class="active" *ngFor="let user of userList" (click)="selectUserHandler(user?.email)">
+                        <div class="d-flex bd-highlight">
+                            <div class="img_cont">
+                                <img src="{{user?.image}}" [alt]="user?.name" class="rounded-circle user_img">
+                                <span class="online_icon"></span>
+                            </div>
+                            <div class="user_info">
+                                <span>{{user?.name}}{{user?.lastName}}</span>
+                                <p>{{user?.name}} is online</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-footer"></div>
+        </div>
+    </div>
+
+
+    <div class="col-md-8 col-xl-9 chat">
+        <div class="card background" *ngIf="!selectedUser">
+            <div class="card-header msg_head">
+                <div class="d-flex bd-highlight">
+                    <div class="img_cont">
+                        <img src="{{currentUser?.image}}" class="rounded-circle user_img">
+                        <span class="online_icon"></span>
+                    </div>
+                    <div class="user_info">
+                        <span>Select user to start chat </span>
+                    </div>
+
+                </div>
+                <span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
+
+            </div>
+            <div class="card-body msg_card_body">
+
+
+            </div>
+            <div class="card-footer">
+
+            </div>
+        </div>
+       <div class="card background" *ngIf="selectedUser && groupChat.length < 3">
+            <div class="card-header msg_head d-inline-flex">
+                <div class="d-flex bd-highlight">
+                    <div class="img_cont">
+                        <img src="{{selectedUser?.image}}" class="rounded-circle user_img">
+                        <span class="online_icon"></span>
+                    </div>
+                    <div class="user_info">
+                        <span>Chat with {{selectedUser.name}}</span>
+                        <p>1767 Messages</p>
+                    </div>
+                </div>
+                <div class="ml-auto p-2">
+                    <img src="assets/person-plus-fill.svg" alt="Add to group chat" width="40" height="40"
+                        (click)="addToGroupChat()">
+                </div>
+
+            </div>
+            <div class="card-body msg_card_body">
+                <div class="d-flex justify-content-end mb-4" *ngFor="let item of messageArray">
+                    <div class="msg_cotainer_send">
+                        {{item?.message}}
+                        <span class="msg_time_send">8:55 AM, Today</span>
+                    </div>
+                    <div class="img_cont_msg">
+                        <img src="{{currentUser.image}}" class="rounded-circle user_img_msg">
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="input-group">
+                    <textarea name="" class="form-control type_msg" placeholder="Type your message..."
+                        [(ngModel)]="messageText" (keyup)="$event.keyCode === 13 && sendMessage(false)"></textarea>
+                    <div class="input-group-append" (click)="sendMessage(false)">
+                        <span class="input-group-text send_btn"><img src="assets/send-x-fill.svg" alt="Send" height="30"
+                                width="30">
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div> 
+
+        <!-- ----------------groupchat------------------->
+
+        <div class="card background" *ngIf="groupChat.length>2">
+            <div class="card-header msg_head d-inline-flex">
+                <div class="d-flex bd-highlight">
+                    <div class="img_cont">
+                        <img src="assets/groupchat.svg" class="rounded-circle user_img">
+                        <span class="online_icon"></span>
+                    </div>
+                    <div class="user_info">
+                        <span>Group chat</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body msg_card_body">
+                <div class="d-flex justify-content-end mb-4" *ngFor="let item of messageArrayGroup">
+                    <div class="msg_cotainer_send">
+                        {{item?.message}}
+                        <span class="msg_time_send">8:55 AM, Today</span>
+                    </div>
+                    <div class="img_cont_msg">
+                        <img src="{{currentUser.image}}" class="rounded-circle user_img_msg">
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="input-group">
+                    <textarea name="" class="form-control type_msg" placeholder="Type your message..."
+                        [(ngModel)]="messageText" (keyup)="$event.keyCode === 13 && sendMessage(true)"></textarea>
+                    <div class="input-group-append" (click)="sendMessage(true)">
+                        <span class="input-group-text send_btn"><img src="assets/send-x-fill.svg" alt="Send" height="30"
+                                width="30">
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        
+    </div>
+</div>

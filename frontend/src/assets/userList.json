@@ -1,0 +1,84 @@
+[
+    {
+      "id": 1,
+      "name": "Hamza ",
+      "lastName":"Mansouri",
+      "phone": "9876598765",
+      "email" : "Mansouris2020@gmail.com",
+      "image": "../assets/1.png",
+      "roomId": {
+        "2": "room-1",
+        "3": "room-2",
+        "4": "room-3"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Dali ",
+      "lastName":"Kebiri",
+      "phone": "21465366587",
+      "email" : "dali@gmail.com",
+
+      "image": "../assets/2.png",
+      "roomId": {
+        "1": "room-1",
+        "3": "room-2",
+        "4": "room-3"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Albert ",
+      "lastName":"Flores",
+      "phone": "9876598765",
+      "email" : "Albert@gmail.com",
+      "image": "../assets/3.png",
+      "roomId": {
+        "1": "room-1",
+        "2": "room-4",
+        "4": "room-6"
+      }
+    },
+    {
+      "id": 4,
+      "name": "Daniel ",
+      "lastName":"dugol",
+      "phone": "9876598765",
+      "email" : "Daniel@gmail.com",
+      "image": "../assets/4.png",
+      "roomId": {
+        "1": "room-1",
+        "2": "room-5",
+        "3": "room-6"
+      }
+    },
+    {
+      "id": 4,
+      "name": "Melanie ",
+      "lastName":"goussan",
+      "phone": "9876598765",
+      "email" : "Melanie@gmail.com",
+      "image": "../assets/4.png",
+      "roomId": {
+        "1": "room-1",
+        "2": "room-5",
+        "3": "room-6"
+      }
+    },
+    {
+      "id": 4,
+      "name": "saoul ",
+      "lastName":"nigez",
+      "phone": "9876598765",
+      "email" : "saoul@gmail.com",
+      "image": "../assets/4.png",
+      "roomId": {
+        "1": "room-1",
+        "2": "room-5",
+        "3": "room-6"
+      }
+    }
+    
+   
+  ]
+  
